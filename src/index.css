@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    html,
+    body {
+        @apply font-body text-text-gray bg-background-dark;
+        overflow-wrap: break-word;
+    }
+}
+
+@layer utilities {
+    .tech-clip-btn {
+        clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+    }
+
+    .tech-clip-card {
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+    }
+
+    .vertical-rl {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+    }
+
+    .scrollbar-none {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .scrollbar-none::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0B0B0E;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2A2A33;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #E10600;
+}
+
+/* Cyber Grid Background Utility Class */
+.cyber-grid-bg {
+    background-color: #0B0B0E;
+    background-image:
+        linear-gradient(rgba(21, 21, 26, 0.4) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(21, 21, 26, 0.4) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+/* Glitch Animation */
+.glitch-text:hover {
+    animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+    color: #E10600;
+}
+
+@keyframes glitch {
+    0% {
+        transform: translate(0)
+    }
+
+    20% {
+        transform: translate(-2px, 2px)
+    }
+
+    40% {
+        transform: translate(-2px, -2px)
+    }
+
+    60% {
+        transform: translate(2px, 2px)
+    }
+
+    80% {
+        transform: translate(2px, -2px)
+    }
+
+    100% {
+        transform: translate(0)
+    }
+}
