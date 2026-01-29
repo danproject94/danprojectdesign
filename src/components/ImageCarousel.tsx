@@ -56,7 +56,7 @@ export default function ImageCarousel({ images }: ImageCarouselProps) {
             >
                 {/* Container da Imagem com Zonas de Clique */}
                 <div
-                    className="relative w-full flex justify-center bg-black/20 overflow-hidden rounded-lg group/carousel cursor-none"
+                    className="relative w-full flex justify-center items-center bg-black/20 group/carousel cursor-none"
                     style={{
                         aspectRatio: aspectRatio,
                         maxHeight: '75vh'
@@ -77,17 +77,34 @@ export default function ImageCarousel({ images }: ImageCarouselProps) {
                     </div>
 
                     <AnimatePresence mode="wait">
-                        <motion.img
+                        <motion.div
                             key={currentIndex}
-                            src={images[currentIndex]}
-                            alt={`Project view ${currentIndex + 1}`}
-                            onLoad={handleImageLoad}
                             initial={{ opacity: 0, scale: 0.98 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 1.02 }}
                             transition={{ duration: 0.4, ease: "easeOut" }}
-                            className="relative z-10 w-full h-full object-contain pointer-events-none"
-                        />
+                            className="relative z-10 overflow-hidden"
+                            style={{
+                                borderRadius: '6px',
+                                display: 'inline-block',
+                                maxWidth: '100%',
+                                maxHeight: '75vh'
+                            }}
+                        >
+                            <img
+                                src={images[currentIndex]}
+                                alt={`Project view ${currentIndex + 1}`}
+                                onLoad={handleImageLoad}
+                                className="pointer-events-none"
+                                style={{
+                                    display: 'block',
+                                    maxWidth: '100%',
+                                    maxHeight: '75vh',
+                                    width: 'auto',
+                                    height: 'auto'
+                                }}
+                            />
+                        </motion.div>
                     </AnimatePresence>
                 </div>
             </div>
@@ -106,14 +123,15 @@ export default function ImageCarousel({ images }: ImageCarouselProps) {
                             >
                                 <button
                                     onClick={() => setCurrentIndex(idx)}
-                                    className={`relative block w-24 aspect-video rounded-md transition-all duration-500 ${idx === currentIndex
+                                    className={`relative block w-24 aspect-video transition-all duration-500 overflow-hidden ${idx === currentIndex
                                         ? "scale-110"
                                         : "opacity-40 hover:opacity-100 scale-100"
                                         }`}
+                                    style={{ borderRadius: '4px' }}
                                 >
-                                    <div className={`absolute inset-0 rounded-md border-2 transition-colors duration-500 ${idx === currentIndex ? "border-primary" : "border-white/10"
-                                        }`} />
-                                    <div className="absolute inset-[2px] rounded-[6px] overflow-hidden">
+                                    <div className={`absolute inset-0 border-2 transition-colors duration-500 z-20 ${idx === currentIndex ? "border-primary" : "border-white/10"
+                                        }`} style={{ borderRadius: '4px' }} />
+                                    <div className="absolute inset-0 overflow-hidden" style={{ borderRadius: '4px' }}>
                                         <img
                                             src={img}
                                             alt={`Thumbnail ${idx + 1}`}
@@ -121,7 +139,7 @@ export default function ImageCarousel({ images }: ImageCarouselProps) {
                                         />
                                     </div>
                                     {idx === currentIndex && (
-                                        <div className="absolute inset-0 rounded-md shadow-[0_0_25px_rgba(225,6,0,0.5)] pointer-events-none" />
+                                        <div className="absolute inset-0 shadow-[0_0_25px_rgba(225,6,0,0.5)] pointer-events-none z-10" style={{ borderRadius: '4px' }} />
                                     )}
                                 </button>
                             </div>

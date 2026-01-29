@@ -40,32 +40,48 @@ export default function ProjectPage() {
                 {/* Lista de Clientes / Projetos dessa Categoria */}
                 <div className="flex flex-col gap-24">
                     {category.clients.length > 0 ? (
-                        category.clients.map((client) => (
-                            <section key={client.id} className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 py-12 border-b border-[#2A2A33]/50 last:border-0">
-                                {/* Coluna do Carrossel (Esquerda/Topo) */}
-                                <div className="lg:col-span-3 order-1 lg:order-1">
-                                    <ImageCarousel images={client.images} />
-                                </div>
+                        category.clients.map((client) => {
+                            const isPortrait = client.layout === 'portrait';
 
-                                {/* Coluna de Texto (Direita) */}
-                                <div className="lg:col-span-2 flex flex-col justify-center order-2 lg:order-2">
-                                    <div className="sticky top-24">
-                                        <h2 className="font-display text-3xl md:text-4xl font-bold uppercase text-white mb-6 border-l-4 border-primary pl-6">
-                                            {client.clientName}
-                                        </h2>
-                                        {client.description && (
-                                            <div className="pl-7 border-l border-[#2A2A33] ml-[2px] space-y-4">
-                                                {client.description.split('\n\n').map((paragraph, idx) => (
-                                                    <p key={idx} className="text-text-gray text-lg leading-snug font-light" style={{ hyphens: 'none' }}>
-                                                        {paragraph}
-                                                    </p>
-                                                ))}
-                                            </div>
-                                        )}
+                            return (
+                                <section
+                                    key={client.id}
+                                    className={`grid grid-cols-1 gap-8 lg:gap-16 py-12 border-b border-[#2A2A33]/50 last:border-0 ${isPortrait
+                                        ? 'lg:grid-cols-12'
+                                        : 'lg:grid-cols-2'
+                                        }`}
+                                >
+                                    {/* Coluna do Carrossel */}
+                                    <div className={`${isPortrait
+                                        ? 'lg:col-span-5'
+                                        : 'lg:col-span-1'
+                                        }`}>
+                                        <ImageCarousel images={client.images} />
                                     </div>
-                                </div>
-                            </section>
-                        ))
+
+                                    {/* Coluna de Texto */}
+                                    <div className={`flex flex-col justify-center ${isPortrait
+                                        ? 'lg:col-span-7'
+                                        : 'lg:col-span-1'
+                                        }`}>
+                                        <div className="sticky top-24">
+                                            <h2 className="font-display text-3xl md:text-4xl font-bold uppercase text-white mb-6 border-l-4 border-primary pl-6">
+                                                {client.clientName}
+                                            </h2>
+                                            {client.description && (
+                                                <div className="pl-7 border-l border-[#2A2A33] ml-[2px] space-y-4">
+                                                    {client.description.split('\n\n').map((paragraph, idx) => (
+                                                        <p key={idx} className="text-text-gray text-lg leading-snug font-light" style={{ hyphens: 'none' }}>
+                                                            {paragraph}
+                                                        </p>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </section>
+                            );
+                        })
                     ) : (
                         <div className="p-12 border border-dashed border-[#2A2A33] rounded-lg text-center">
                             <p className="text-text-gray font-mono uppercase">Em breve: Mais projetos nesta categoria.</p>

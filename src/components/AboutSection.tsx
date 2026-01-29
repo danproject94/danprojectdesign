@@ -15,14 +15,14 @@ export default function AboutSection() {
                         O que <br /><span className="text-primary font-bold">eu faço</span>
                     </h2>
                     <div className="relative pl-6 border-l-2 border-[#2A2A33]">
-                        <p className="text-text-gray text-lg leading-relaxed mb-6 font-light">
+                        <p className="text-text-gray text-lg leading-relaxed mb-6 font-light uppercase">
                             <span className="text-white font-bold">Não faço design para enfeitar.</span>
                         </p>
                         <p className="text-text-gray text-lg leading-relaxed mb-6 font-light">
-                            Crio identidades visuais e artes estratégicas para streamers, marcas tech e profissionais que precisam se destacar em um ambiente competitivo.
+                            Eu crio identidades visuais e artes estratégicas com foco em <span className="text-white font-semibold">streamers, projetos gamer e marcas tech,</span> desenvolvendo visuais pensados para destacar presença e posicionamento em ambientes competitivos.
                         </p>
                         <p className="text-text-gray text-lg leading-relaxed mb-6 font-light">
-                            Meu foco é unir estética gamer, leitura visual clara e impacto imediato — sem design genérico, sem soluções fracas.
+                            Ao longo da minha trajetória, também atuei em projetos institucionais e promocionais para diferentes áreas, sempre aplicando o mesmo princípio: <span className="text-white font-semibold">design funcional, leitura clara e impacto visual,</span> sem soluções genéricas ou descartáveis.
                         </p>
                     </div>
                     <div className="mt-10 grid grid-cols-2 gap-6">
