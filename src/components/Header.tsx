@@ -1,23 +1,36 @@
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 export default function Header() {
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const navLinks = [
-        { name: 'Portfólio', href: '#portfolio' },
-        { name: 'Sobre', href: '#about' },
-        { name: 'Processo', href: '#process' },
-        { name: 'Contato', href: '#contact' },
+        { name: 'Portfólio', href: 'portfolio' },
+        { name: 'Sobre', href: 'about' },
+        { name: 'Processo', href: 'process' },
+        { name: 'Contato', href: 'contact' },
     ];
 
-    const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
         e.preventDefault();
-        const targetId = href.replace('#', '');
-        const element = document.getElementById(targetId);
 
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
+        if (location.pathname === '/') {
+            // Already on home page, just scroll
+            const element = document.getElementById(targetId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
         } else {
-            // Handle cross-page navigation
-            window.location.hash = `/${href}`;
+            // On another page, navigate to home and then scroll
+            navigate('/');
+            // Small delay to allow home page to mount
+            setTimeout(() => {
+                const element = document.getElementById(targetId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 100);
         }
     };
 
@@ -37,8 +50,8 @@ export default function Header() {
                         {navLinks.map((link) => (
                             <a
                                 key={link.name}
-                                href={link.href}
-                                onClick={(e) => scrollToSection(e, link.href)}
+                                href={`#${link.href}`}
+                                onClick={(e) => handleNavClick(e, link.href)}
                                 className="text-xs font-mono font-medium text-text-gray hover:text-primary transition-all uppercase tracking-[0.3em] relative group py-2"
                             >
                                 <span className="relative z-10">{link.name}</span>
