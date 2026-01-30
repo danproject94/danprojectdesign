@@ -60,13 +60,14 @@ export default function PortfolioSection() {
                                 <h3 className="font-display text-2xl font-bold text-white uppercase group-hover:text-primary transition-colors tracking-tight">{project.title}</h3>
                                 <span className="material-symbols-outlined text-text-gray/40 group-hover:text-primary transition-colors text-xl">{project.icon}</span>
                             </div>
-                            <p className="text-sm text-text-gray/60 font-light leading-relaxed italic mb-6">
+                            <p className="text-sm text-text-gray/60 font-light leading-relaxed italic mb-8">
                                 "{project.description}"
                             </p>
 
                             <div className="flex items-center justify-between">
-                                <Link to={`/portfolio/${project.id}`} className="text-[10px] font-mono text-text-gray hover:text-primary uppercase tracking-[0.2em] transition-colors border-b border-white/5 py-1">
+                                <Link to={`/portfolio/${project.id}`} className="text-[11px] font-mono text-primary font-bold uppercase tracking-[0.2em] transition-all group-hover:tracking-[0.3em] flex items-center gap-2">
                                     Ver Projetos //
+                                    <span className="w-8 h-px bg-primary/30 group-hover:w-12 transition-all"></span>
                                 </Link>
                                 <div className="flex gap-1">
                                     <div className="w-1 h-1 bg-white/10 group-hover:bg-primary transition-colors"></div>
@@ -78,13 +79,14 @@ export default function PortfolioSection() {
                         {/* Hover Border Accents */}
                         <div className="absolute top-0 left-0 w-1 h-0 group-hover:h-full bg-primary transition-all duration-500"></div>
                         <div className="absolute bottom-0 right-0 w-0 h-1 group-hover:w-full bg-primary transition-all duration-500 delay-100"></div>
+
                     </motion.div>
                 ))}
             </div>
 
             {/* Outros Projetos - Title + Cards in Same Row */}
             <div className="relative z-10">
-                <div className="flex flex-col lg:flex-row items-start lg:items-stretch gap-8">
+                <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-8">
                     {/* Title Section */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
@@ -93,7 +95,7 @@ export default function PortfolioSection() {
                         transition={{ duration: 0.6 }}
                         className="flex items-center justify-center lg:justify-start lg:w-auto w-full"
                     >
-                        <div className="flex flex-col items-start gap-2">
+                        <div className="flex flex-col items-center lg:items-start gap-2 text-center lg:text-left">
                             <div className="h-px w-12 bg-primary"></div>
                             <h3 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-tighter text-white whitespace-nowrap">
                                 Outros<br />Projetos
@@ -103,11 +105,12 @@ export default function PortfolioSection() {
                     </motion.div>
 
                     {/* Subcategories Cards */}
-                    <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
                         {subCategories.map((project, index) => (
                             <Link
                                 key={project.id}
                                 to={`/portfolio/${project.id}`}
+                                className="block"
                             >
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.95, y: 30 }}
@@ -115,20 +118,23 @@ export default function PortfolioSection() {
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
                                     whileHover={{ y: -10, borderColor: 'rgba(225, 6, 0, 0.4)' }}
-                                    className="group relative bg-[#0B0B0C] border border-[#1A1A1D] transition-all duration-500 p-8 h-full flex flex-col justify-center min-h-[200px]"
+                                    className="group relative bg-[#0B0B0C] border border-[#1A1A1D] transition-all duration-500 p-8 h-full flex flex-col justify-between min-h-[180px]"
                                 >
                                     {/* Icon & Title */}
-                                    <div className="flex items-center gap-4 mb-4">
+                                    <div className="flex items-center gap-4">
                                         <span className="material-symbols-outlined text-primary text-3xl">{project.icon}</span>
                                         <h3 className="font-display text-lg font-bold text-white uppercase group-hover:text-primary transition-colors tracking-tight">
                                             {project.title}
                                         </h3>
                                     </div>
 
-                                    {/* Description - 2 lines max */}
-                                    <p className="text-sm text-text-gray/70 font-light leading-relaxed line-clamp-2">
-                                        {project.description}
-                                    </p>
+                                    {/* CTA Link instead of Description */}
+                                    <div className="mt-6 flex items-center justify-between">
+                                        <span className="text-[11px] font-mono text-primary font-bold uppercase tracking-[0.2em] transition-all group-hover:tracking-[0.3em] flex items-center gap-2">
+                                            Ver Projetos //
+                                            <span className="w-8 h-px bg-primary/30 group-hover:w-12 transition-all"></span>
+                                        </span>
+                                    </div>
 
                                     {/* Hover Border Accents */}
                                     <div className="absolute top-0 left-0 w-1 h-0 group-hover:h-full bg-primary transition-all duration-500"></div>
@@ -139,6 +145,7 @@ export default function PortfolioSection() {
                     </div>
                 </div>
             </div>
+
         </section>
     );
 }
